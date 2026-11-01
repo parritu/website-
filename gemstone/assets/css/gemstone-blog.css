@@ -152,7 +152,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .hero__title{margin:0 0 2.2rem;font-family:var(--display);font-weight:400;font-size:clamp(3rem,9vw,9.5rem);line-height:.98;letter-spacing:-.025em;color:var(--ivory)}
 .hero__title .line{display:block;overflow:hidden;padding-bottom:.08em}
 .hero__title .line>span{display:block;transform:translateY(110%);animation:rise 1.5s var(--ease) 1s forwards}
-.hero__title .line--it>span{font-style:italic;color:var(--gold);animation-delay:1.15s}
+.hero__title .line--it>span{font-style:italic;color:var(--ivory);animation-delay:1.15s}
 @keyframes rise{to{transform:none}}
 .hero__row{display:flex;justify-content:center;opacity:0;animation:fadeUp 1s var(--ease) 1.7s forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -187,13 +187,14 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .reveal.is-visible{opacity:1;transform:none}
 .footer__cta>.reveal:nth-child(2){transition-delay:.12s}.footer__cta>.reveal:nth-child(4){transition-delay:.24s}.footer__cta>.reveal:nth-child(5){transition-delay:.36s}
 
-/* Static (no JS / reduced motion): stacked full-screen scenes */
+/* Static natural scrolling: stacked full-screen scenes without scroll-hijacking */
 .static .stage,.no-js .stage{position:relative;height:auto;overflow:visible}
 .static .scene,.no-js .scene{position:relative;height:100vh;height:100svh;transform:none!important;visibility:visible!important}
 .static .scene__text>*,.static .rule,.no-js .scene__text>*{opacity:1!important;transform:none!important}
 .static .scene__dim{display:none}
 .static .reveal,.no-js .reveal{opacity:1;transform:none}
-.no-js .scene__media img{opacity:1}
+.static .scene__media img,.no-js .scene__media img{opacity:1!important;transform:none!important}
+.static .sweep{display:none!important}
 
 /* Responsive */
 @media (max-width:1024px){.dots span{display:none}}
@@ -240,3 +241,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .sweep{position:absolute;top:0;bottom:0;left:0;width:100%;z-index:20;pointer-events:none;opacity:0;will-change:transform,opacity;
   background:linear-gradient(105deg,rgba(213,181,129,0) 30%,rgba(213,181,129,.10) 42%,rgba(239,227,203,.22) 50%,rgba(213,181,129,.10) 58%,rgba(213,181,129,0) 70%)}
 .no-js .sweep,.static .sweep{display:none}
+
+/* --- Complete refinement: remove golden elements, slide indicators, numbering, and decorative lines --- */
+.dots,.dots.is-on{display:none !important}
+.scene__count{display:none !important}
+.menu a small{display:none !important}
+.eyebrow{display:none !important}
+.rule,.footer__rule,.hero__cue{display:none !important}
+.scene h2,.scene h2 .w>span{color:var(--ivory)!important}
+.hero__title{color:var(--ivory)!important}

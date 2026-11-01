@@ -152,7 +152,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .hero__title{margin:0 0 2.2rem;font-family:var(--display);font-weight:400;font-size:clamp(3rem,9vw,9.5rem);line-height:.98;letter-spacing:-.025em;color:var(--ivory)}
 .hero__title .line{display:block;overflow:hidden;padding-bottom:.08em}
 .hero__title .line>span{display:block;transform:translateY(110%);animation:rise 1.5s var(--ease) 1s forwards}
-.hero__title .line--it>span{font-style:italic;color:var(--gold);animation-delay:1.15s}
+.hero__title .line--it>span{font-style:italic;color:var(--ivory);animation-delay:1.15s}
 @keyframes rise{to{transform:none}}
 .hero__row{display:flex;justify-content:center;opacity:0;animation:fadeUp 1s var(--ease) 1.7s forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -187,13 +187,14 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .reveal.is-visible{opacity:1;transform:none}
 .footer__cta>.reveal:nth-child(2){transition-delay:.12s}.footer__cta>.reveal:nth-child(4){transition-delay:.24s}.footer__cta>.reveal:nth-child(5){transition-delay:.36s}
 
-/* Static (no JS / reduced motion): stacked full-screen scenes */
+/* Static natural scrolling: stacked full-screen scenes without scroll-hijacking */
 .static .stage,.no-js .stage{position:relative;height:auto;overflow:visible}
 .static .scene,.no-js .scene{position:relative;height:100vh;height:100svh;transform:none!important;visibility:visible!important}
 .static .scene__text>*,.static .rule,.no-js .scene__text>*{opacity:1!important;transform:none!important}
 .static .scene__dim{display:none}
 .static .reveal,.no-js .reveal{opacity:1;transform:none}
-.no-js .scene__media img{opacity:1}
+.static .scene__media img,.no-js .scene__media img{opacity:1!important;transform:none!important}
+.static .sweep{display:none!important}
 
 /* Responsive */
 @media (max-width:1024px){.dots span{display:none}}
@@ -245,9 +246,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .scene.scene--light .scene__shade{background:linear-gradient(to right,rgba(248,241,231,.86) 0%,rgba(248,241,231,.58) 30%,rgba(248,241,231,0) 58%),linear-gradient(to top,rgba(248,241,231,.55) 0%,rgba(248,241,231,0) 35%)}
 .scene.scene--light.scene--right .scene__shade{background:linear-gradient(to left,rgba(248,241,231,.86) 0%,rgba(248,241,231,.58) 30%,rgba(248,241,231,0) 58%),linear-gradient(to top,rgba(248,241,231,.55) 0%,rgba(248,241,231,0) 35%)}
 .scene.scene--light .eyebrow{color:#7a5718}
-.scene.scene--light .rule{background:#7a5718}
 .scene.scene--light h2{color:#0E3D3D}
-.scene.scene--light h2 .w:last-child>span{color:#7a5718}
+.scene.scene--light h2 .w:last-child>span{color:#0E3D3D}
 .scene.scene--light p.body{color:rgba(8,32,31,.9)}
 .scene.scene--light .scene__count{color:rgba(8,32,31,.6)}
 body.on-light .dots a{color:rgba(8,32,31,.55)}
@@ -271,14 +271,11 @@ body.on-light .dots a:hover,body.on-light .dots a.is-active{color:#7a5718}
   .scene .scene__text,.scene.scene--right .scene__text{bottom:6.2rem}
 }
 
-/* Section labels ("01 — …"): larger, in the display serif */
-.scene .eyebrow{font-family:var(--display);font-weight:400;font-style:italic;text-transform:none;letter-spacing:.03em;font-size:clamp(1.25rem,1.9vw,2rem);line-height:1.2;margin-bottom:1.3rem}
-@media (max-width:760px){
-  .scene .eyebrow{font-size:1.2rem;letter-spacing:.02em;margin-bottom:1rem}
-}
-
-/* Section label colour: soft blush on dark photographs, deep teal on light ones */
-.scene .eyebrow{color:#EBCDB8}
-.scene .rule{background:#EBCDB8}
-.scene.scene--light .eyebrow{color:#1B6B62}
-.scene.scene--light .rule{background:#1B6B62}
+/* --- Complete refinement: remove golden elements, slide indicators, numbering, and decorative lines --- */
+.dots,.dots.is-on{display:none !important}
+.scene__count{display:none !important}
+.menu a small{display:none !important}
+.eyebrow{display:none !important}
+.rule,.footer__rule,.hero__cue{display:none !important}
+.scene:not(.scene--light) h2,.scene:not(.scene--light) h2 .w>span{color:var(--ivory)!important}
+.hero__title{color:var(--ivory)!important}

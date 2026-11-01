@@ -53,7 +53,7 @@
   var ease = function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2 };
   var out = function (x) { return 1 - Math.pow(1 - x, 3) };
 
-  var staticMode = false, vh = 0, R = 0, top0 = 0, target = 0, cur = 0, raf = 0, active = -1, mobile = false;
+  var staticMode = true, vh = 0, R = 0, top0 = 0, target = 0, cur = 0, raf = 0, active = -1, mobile = false;
 
   function layout() {
     if (staticMode) { story.style.height = ''; return; }
@@ -247,26 +247,15 @@
       inObs.observe(d.querySelector('.film__head'));
     } else film.classList.add('is-in');
 
-    /* Scroll-linked entrance: the frame grows into place and its hairline draws around it */
-    var fticking = false;
+    /* Natural film stage without scroll-linked entrance or rotation */
     function filmUpdate() {
-      fticking = false;
-      var p = 1;
-      if (!reduce && !started) {
-        var r = stageEl.getBoundingClientRect();
-        p = ease(clamp((innerHeight - r.top) / (innerHeight * .74), 0, 1));
-      }
-      var q = p * 4;
-      stageEl.style.setProperty('--p', p.toFixed(4));
-      stageEl.style.setProperty('--e1', clamp(q, 0, 1).toFixed(3));
-      stageEl.style.setProperty('--e2', clamp(q - 1, 0, 1).toFixed(3));
-      stageEl.style.setProperty('--e3', clamp(q - 2, 0, 1).toFixed(3));
-      stageEl.style.setProperty('--e4', clamp(q - 3, 0, 1).toFixed(3));
-      if (mark && !reduce) mark.style.setProperty('--r', ((scrollY || 0) * .012).toFixed(2));
+      stageEl.style.setProperty('--p', '1');
+      stageEl.style.setProperty('--e1', '1');
+      stageEl.style.setProperty('--e2', '1');
+      stageEl.style.setProperty('--e3', '1');
+      stageEl.style.setProperty('--e4', '1');
+      if (mark) mark.style.setProperty('--r', '0');
     }
-    function reqFilm() { if (!fticking) { fticking = true; requestAnimationFrame(filmUpdate); } }
-    addEventListener('scroll', reqFilm, { passive: true });
-    addEventListener('resize', reqFilm);
     filmUpdate();
 
     /* Chapter dots and menu follow the reader into the film */

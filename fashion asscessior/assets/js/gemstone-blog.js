@@ -51,7 +51,7 @@
   var ease = function (x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2 };
   var out = function (x) { return 1 - Math.pow(1 - x, 3) };
 
-  var staticMode = false, vh = 0, R = 0, top0 = 0, target = 0, cur = 0, raf = 0, active = -1, mobile = false;
+  var staticMode = true, vh = 0, R = 0, top0 = 0, target = 0, cur = 0, raf = 0, active = -1, mobile = false;
 
   function layout() {
     if (staticMode) { story.style.height = ''; return; }
